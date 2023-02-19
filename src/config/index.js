@@ -1,5 +1,5 @@
 const config = () => ({
-  port: process.env.APP_PORT || 8080,
+  port: process.env.PORT || 8080,
   database: {
     host: process.env.APP_DATABASE_URL,
     user: process.env.USER_DATA_BASE,
