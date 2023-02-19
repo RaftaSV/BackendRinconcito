@@ -36,8 +36,8 @@ export const sumAllCost = async (req, res) => {
       where: {
         costStatus: 0,
         [Op.and]: [
-          Sequelize.where(Sequelize.fn('MONTH', Sequelize.col('costDate')), month),
-          Sequelize.where(Sequelize.fn('YEAR', Sequelize.col('costDate')), year),
+          sequelize.where(sequelize.fn('MONTH', sequelize.col('costDate')), month),
+          sequelize.where(sequelize.fn('YEAR', sequelize.col('costDate')), year),
         ],
       }
     });
@@ -45,8 +45,8 @@ export const sumAllCost = async (req, res) => {
       where: {
         invoiceStatus: 0,
         [Op.and]: [
-          Sequelize.where(Sequelize.fn('MONTH', Sequelize.col('invoiceDate')), month),
-          Sequelize.where(Sequelize.fn('YEAR', Sequelize.col('invoiceDate')), year),
+          sequelize.where(sequelize.fn('MONTH', sequelize.col('invoiceDate')), month),
+          sequelize.where(sequelize.fn('YEAR', sequelize.col('invoiceDate')), year),
         ],
       }
     });
@@ -58,8 +58,8 @@ export const sumAllCost = async (req, res) => {
         model: InvoiceModel,
         where: {
           [Op.and]: [
-            Sequelize.where(Sequelize.fn('MONTH', Sequelize.col('invoiceDate')), month),
-            Sequelize.where(Sequelize.fn('YEAR', Sequelize.col('invoiceDate')), year),
+            sequelize.where(sequelize.fn('MONTH', sequelize.col('invoiceDate')), month),
+            sequelize.where(sequelize.fn('YEAR', sequelize.col('invoiceDate')), year),
           ],
         },
       }],
@@ -72,8 +72,8 @@ export const sumAllCost = async (req, res) => {
         model: InvoiceModel,
         where: {
           [Op.and]: [
-            Sequelize.where(Sequelize.fn('MONTH', Sequelize.col('invoiceDate')), month),
-            Sequelize.where(Sequelize.fn('YEAR', Sequelize.col('invoiceDate')), year),
+            sequelize.where(sequelize.fn('MONTH', sequelize.col('invoiceDate')), month),
+            sequelize.where(sequelize.fn('YEAR', sequelize.col('invoiceDate')), year),
           ],
         },
       }],
