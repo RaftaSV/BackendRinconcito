@@ -1,5 +1,5 @@
 import { DatabaseConnection } from 'Server/db';
-import sequelize from 'Sequelize';
+import sequelize from 'sequelize';
 
 const InvoiceDetailModel = DatabaseConnection.define('invoiceDetails', {
   detailInvoiceId: {
