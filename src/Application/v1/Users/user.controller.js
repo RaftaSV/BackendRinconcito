@@ -192,6 +192,7 @@ export const deleteUser = async (req, res) => {
 };
 
 export const getUser = async (req, res) => {
+  console.log('hola');
   res.status(200).json({
     message: 'ok'
   });
