@@ -1,5 +1,5 @@
-import { encryptPass, comparePass } from '../../../Utils/cryptPass';
-import { genToken, TokenValidation } from '../../../Utils/Authentication';
+import { encryptPass, comparePass } from 'Utils/cryptPass';
+import { genToken, TokenValidation } from 'Utils/Authentication';
 
 import UserModel from './user.model';
 
@@ -196,4 +196,4 @@ export const getUser = async (req, res) => {
   res.status(200).json({
     message: 'ok'
   });
-}
+};

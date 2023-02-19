@@ -1,30 +1,30 @@
-import { sequelize } from 'Server/db';
-import Sequelize from 'sequelize';
+import { DatabaseConnection } from 'Server/db';
+import sequelize from 'sequelize';
 
-const OrderDetailModel = sequelize.define('orderdetails', {
+const OrderDetailModel = DatabaseConnection.define('orderdetails', {
   detailsOrderId: {
-    type: Sequelize.INTEGER,
+    type: sequelize.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
   orderId: {
-    type: Sequelize.INTEGER,
+    type: sequelize.INTEGER,
     references: {
       model: 'orders',
       key: 'orderId'
     }
   },
   platterId: {
-    type: Sequelize.INTEGER,
+    type: sequelize.INTEGER,
     references: {
       model: 'platters',
       key: 'platterId'
     }
   },
   platterPrice: {
-    type: Sequelize.DOUBLE
+    type: sequelize.DOUBLE
   },
-  detailOrderStatus: Sequelize.INTEGER
+  detailOrderStatus: sequelize.INTEGER
 });
 
 OrderDetailModel.sync();

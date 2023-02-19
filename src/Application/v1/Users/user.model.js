@@ -1,7 +1,7 @@
-import { Sequelize } from '../../../Server/db';
 import sequelize from 'sequelize';
+import { DatabaseConnection } from 'Server/db';
 // creacion del modelo de la base de datos para su utilizacion en los controladores
-const UserModel = Sequelize.define('users', {
+const UserModel = DatabaseConnection.define('users', {
   userId: {
     type: sequelize.INTEGER,
     primaryKey: true,

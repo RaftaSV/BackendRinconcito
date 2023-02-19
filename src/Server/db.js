@@ -3,7 +3,7 @@ import getConfig from '../config';
 
 const { database } = getConfig();
 
-export const Sequelize = new sequelize(
+export const DatabaseConnection = new sequelize(
   database.database,
   database.user,
   database.password,
@@ -20,7 +20,7 @@ export const Sequelize = new sequelize(
   });
 
 export const initializeDB = async () => {
-  Sequelize.authenticate()
+  DatabaseConnection.authenticate()
     .then(() => {
       console.log(`connected at database ${database.database}`);
     })

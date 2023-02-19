@@ -1,4 +1,4 @@
-import { sequelize } from 'Server/db';
+import { DatabaseConnection } from 'Server/db';
 import OrderModel from '../Orders/order.model';
 import OrderDetailModel from './orderDetail.model';
 import PlatterModel from '../Platters/platter.model';
@@ -14,7 +14,7 @@ export const getAllOrderDetails = async (req, res) => {
     });
   }
   try {
-    const data = await sequelize.query(`select a.orderId,a.detailsOrderId,b.orderDate,
+    const data = await DatabaseConnection.query(`select a.orderId,a.detailsOrderId,b.orderDate,
 b.orderType, b.orderTime, a.platterId,c.platterName, a.platterPrice, d.userName,e.tableNumber
 from orderdetails a inner join
 orders b on a.orderId = b.orderId

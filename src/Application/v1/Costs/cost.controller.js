@@ -1,4 +1,4 @@
-import Sequelize, { Op } from 'sequelize';
+import sequelize, { Op } from 'sequelize';
 import CostModel from './cost.model';
 import InvoiceModel from '../Invoices/invoice.model';
 import invoiceDetailModel from '../InvoiceDetails/invoiceDetail.model';
@@ -15,8 +15,8 @@ export const getAllCosts = async (req, res) => {
       where: {
         costStatus: 0,
         [Op.and]: [
-          Sequelize.where(Sequelize.fn('MONTH', Sequelize.col('costDate')), month),
-          Sequelize.where(Sequelize.fn('YEAR', Sequelize.col('costDate')), year),
+          sequelize.where(sequelize.fn('MONTH', sequelize.col('costDate')), month),
+          sequelize.where(sequelize.fn('YEAR', sequelize.col('costDate')), year),
         ],
       }
     });

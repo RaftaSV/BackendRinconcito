@@ -1,37 +1,37 @@
-import Sequelize from 'sequelize';
-import { sequelize } from 'Server/db';
+import sequelize from 'sequelize';
+import { DatabaseConnection } from 'Server/db';
 
-const OrderModel = sequelize.define('orders', {
+const OrderModel = DatabaseConnection.define('orders', {
   orderId: {
-    type: Sequelize.INTEGER,
+    type: sequelize.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
   orderTime: {
-    type: Sequelize.TIME,
+    type: sequelize.TIME,
   },
   orderDate: {
-    type: Sequelize.DATEONLY,
+    type: sequelize.DATEONLY,
   },
   orderType: {
-    type: Sequelize.INTEGER
+    type: sequelize.INTEGER
   },
   tableId: {
-    type: Sequelize.INTEGER,
+    type: sequelize.INTEGER,
     references: {
       model: 'restauranttables',
       key: 'tableId'
     }
   },
   userId: {
-    type: Sequelize.INTEGER,
+    type: sequelize.INTEGER,
     references: {
       model: 'users',
       key: 'userId'
     }
   },
   orderStatus: {
-    type: Sequelize.INTEGER
+    type: sequelize.INTEGER
   }
 });
 
