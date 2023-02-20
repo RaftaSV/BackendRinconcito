@@ -1,5 +1,5 @@
 APP_DATABASE_URL=db4free.net
-USER_DATA_BASE=rinconcito
+USER_DATA_BASE=restaurant
 PASS_DATA_BASE=Rinconcito
 DATA_BASE=rinconcito
 DATA_BASE_PORT=3306
