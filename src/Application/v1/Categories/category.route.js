@@ -1,4 +1,5 @@
 import express from 'express';
+import { validation } from 'Utils/Authentication';
 import {
   insertCategory,
   updateCategory,
@@ -9,7 +10,7 @@ import {
 const router = express.Router();
 
 router.get('/', getAllCategories);
-router.post('/', insertCategory);
-router.put('/:categoryId', updateCategory);
-router.delete('/:categoryId', deleteCategory);
+router.post('/',validation, insertCategory);
+router.put('/:categoryId',validation, updateCategory);
+router.delete('/:categoryId',validation, deleteCategory);
 export default router;

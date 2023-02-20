@@ -1,4 +1,5 @@
 import express from 'express';
+import { validation } from 'Utils/Authentication';
 import {
   getAllPlatters,
   insertPlatter,
@@ -10,7 +11,7 @@ const router = express.Router();
 
 router.get('/:categoryId', getAllPlatters);
 router.get('/', getAllPlatters);
-router.post('/', insertPlatter);
-router.put('/:platterID', updatePlatter);
-router.delete('/:platterID', deletePlatter);
+router.post('/', validation, insertPlatter);
+router.put('/:platterID', validation, updatePlatter);
+router.delete('/:platterID', validation, deletePlatter);
 export default router;

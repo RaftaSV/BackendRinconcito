@@ -2,7 +2,6 @@ import { encryptPass, comparePass } from 'Utils/cryptPass';
 import { genToken, TokenValidation } from 'Utils/Authentication';
 
 import UserModel from './user.model';
-import { log } from 'console';
 
 // Este metodo es para la verificacion de los usuarios del sistema
 export const login = async (req, res) => {
@@ -67,7 +66,6 @@ export const insertUser = async (req, res) => {
     password,
     userType
   } = req.body;
-  console.log(req.body);
   if (!name || !lastName || !phone || !userName || !password || !userType) {
     return res.status(401).json({
       message: 'Error missing data'
@@ -108,7 +106,6 @@ export const insertUser = async (req, res) => {
 
 export const validationToken = async (req, res) => {
   const token = req.headers['authorization'];
-  console.log(token);
   if (!token) {
     return res.status(401).json({ message: 'No se proporcionó un token de autenticación.' });
   }
@@ -193,9 +190,4 @@ export const deleteUser = async (req, res) => {
   }
 };
 
-export const getUser = async (req, res) => {
-  console.log('hola');
-  res.status(200).json({
-    message: 'ok'
-  });
-};
+

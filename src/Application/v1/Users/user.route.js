@@ -5,18 +5,17 @@ import {
   login,
   validationToken,
   updateUser,
-  deleteUser,
-  getUser
+  deleteUser
 } from './user.controller';
 
+import { validation } from 'Utils/Authentication';
 const router = express.Router();
 
-router.get('/', getAllUser);
-router.post('/', insertUser);
+router.get('/', validation, getAllUser);
+router.post('/', validation, insertUser);
 router.post('/login', login);
 router.post('/validation', validationToken);
-router.put('/:userId', updateUser);
-router.delete('/:userId', deleteUser);
-router.get('/User', getUser);
+router.put('/:userId',validation, updateUser);
+router.delete('/:userId',validation, deleteUser);
 
 export default router;

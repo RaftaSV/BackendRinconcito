@@ -1,4 +1,5 @@
 import express from 'express';
+import { validation } from 'Utils/Authentication';
 
 import {
   getAllInvoices,
@@ -8,8 +9,8 @@ import {
 
 const router = express.Router();
 
-router.get('/', getAllInvoices);
-router.post('/', insertInvoice);
-router.delete('/:invoiceId', deleteInvoice);
+router.get('/',validation, getAllInvoices);
+router.post('/',validation, insertInvoice);
+router.delete('/:invoiceId', validation, deleteInvoice);
 
 export default router;

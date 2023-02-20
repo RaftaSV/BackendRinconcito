@@ -23,3 +23,17 @@ export function genToken(User) {
     return err;
   }
 }
+
+export const validation = (req, res, next) => {
+  const token = req.headers['authorization'];
+  // Aquí puedes validar el token. Por ejemplo, puedes comprobar si el token es correcto y no ha expirado.
+  try {
+    jwt.verify(token, Token.secret);
+    console.log('Token válido');
+    next(); // Si el token es válido, se llama a la siguiente función middleware o ruta
+  } catch (err) {
+    console.log(`${err}`);
+    res.status(401).send('Token no válido'); // Si el token no es válido, se envía una respuesta de error con un código 401
+  }
+
+}

@@ -1,4 +1,5 @@
 import express from 'express';
+import { validation } from 'Utils/Authentication';
 import {
   getAllInvoiceDetails,
   insertInvoiceDetail
@@ -6,7 +7,7 @@ import {
 
 const router = express.Router();
 
-router.get('/:invoiceId', getAllInvoiceDetails);
-router.post('/:invoiceId', insertInvoiceDetail);
+router.get('/:invoiceId', validation, getAllInvoiceDetails);
+router.post('/:invoiceId', validation, insertInvoiceDetail);
 
 export default router;

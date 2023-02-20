@@ -1,0 +1,8 @@
+APP_DATABASE_URL=db4free.net
+USER_DATA_BASE=rinconcito
+PASS_DATA_BASE=Rinconcito
+DATA_BASE=rinconcito
+DATA_BASE_PORT=3306
+PORT=8080
+DIALECT=mysql
+SECRET=raftaSVisthebestprogramarf
