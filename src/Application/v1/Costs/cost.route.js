@@ -1,4 +1,5 @@
 import express from 'express';
+import { validation } from 'Utils/Authentication';
 
 import {
   getAllCosts, insertCost, updateCost, deleteCost, sumAllCost
@@ -6,9 +7,9 @@ import {
 
 const router = express.Router();
 
-router.get('/:fecha', getAllCosts);
-router.get('/sum/:fecha', sumAllCost);
-router.post('/', insertCost);
-router.put('/:costId', updateCost);
-router.delete('/:costId', deleteCost);
+router.get('/:fecha',validation, getAllCosts);
+router.get('/sum/:fecha',validation, sumAllCost);
+router.post('/', validation, insertCost);
+router.put('/:costId', validation, updateCost);
+router.delete('/:costId',validation, deleteCost);
 export default router;
