@@ -7,6 +7,7 @@ CategoryModel.hasMany(PlatterModel, { foreignKey: 'categoryId' });
 export const getAllPlatters = async (req, res) => {
   try {
     const { categoryId } = req.params;
+    console.log(req.params);
     if (categoryId) {
       const data = await PlatterModel.findAll({
         include: [{
@@ -18,9 +19,9 @@ export const getAllPlatters = async (req, res) => {
           categoryId
         }
       });
-      return res.status(200).json({
+      return res.status(200).json(
         data
-      });
+      );
     }
   } catch (e) {
     return res.status(500).json({
@@ -38,9 +39,9 @@ export const getAllPlatters = async (req, res) => {
     }
   });
   return res.status(200)
-    .json({
+    .json(
       data
-    });
+    );
 };
 
 export const insertPlatter = async (req, res) => {

@@ -10,7 +10,6 @@ import {
 const router = express.Router();
 
 router.get('/:categoryId', getAllPlatters);
-router.get('/', getAllPlatters);
 router.post('/', validation, insertPlatter);
 router.put('/:platterID', validation, updatePlatter);
 router.delete('/:platterID', validation, deletePlatter);
