@@ -8,7 +8,7 @@ import {
 
 const router = express.Router();
 
-router.get('/', validation, getAllOrders);
+router.get('/:fecha', validation, getAllOrders);
 router.post('/', insertOrder);
 router.put('/:orderId',validation, updateOrder);
 router.delete('/:orderId',validation, deleteOrder);

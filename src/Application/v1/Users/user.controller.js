@@ -69,7 +69,7 @@ export const insertUser = async (req, res) => {
   } = req.body;
   if (!name || !lastName || !phone || !userName || !password || !userType) {
     return res.status(401).json({
-      message: 'Error missing data'
+      message: 'Error falta datos'
     });
   }
   const user = await UserModel.findOne({
@@ -80,7 +80,7 @@ export const insertUser = async (req, res) => {
   });
   if (user) {
     return res.status(409).json({
-      message: `user already using ${userName}`
+      message: `El usuario ${userName} ya esta en uso`
     });
   }
   const newUser = {

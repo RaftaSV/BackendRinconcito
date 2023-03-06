@@ -1,9 +1,11 @@
 import { moveFile, removeFile, uploadFile } from 'Utils/dirFileMulter';
 import PlatterModel from './platter.model';
 import CategoryModel from '../Categories/category.model';
+import sequelize, { Op } from 'sequelize';
 
 PlatterModel.belongsTo(CategoryModel, { foreignKey: 'categoryId' });
 CategoryModel.hasMany(PlatterModel, { foreignKey: 'categoryId' });
+
 export const getAllPlatters = async (req, res) => {
   try {
     const { categoryId } = req.params;
@@ -28,20 +30,26 @@ export const getAllPlatters = async (req, res) => {
       message: 'error'
     });
   }
+};
 
-  const data = await PlatterModel.findAll({
-    include: [{
-      model: CategoryModel,
-      attributes: ['categoryName']
-    }],
-    where: {
-      platterStatus: 0,
-    }
-  });
-  return res.status(200)
-    .json(
-      data
-    );
+export const getPlattlerLike = async (req, res) => {
+  try {
+    const { platterName } = req.params;
+    const data = await PlatterModel.findAll({
+      where: {
+        platterName: {
+          [Op.like]: `%${platterName}%`
+        },
+        platterStatus: 0
+      },
+      limit: 4
+    });
+    return res.status(200).json(data);
+  } catch (e) {
+    return res.status(500).json({
+      message: e
+    });
+  }
 };
 
 export const insertPlatter = async (req, res) => {
@@ -68,7 +76,7 @@ export const insertPlatter = async (req, res) => {
                 || !categoryId) {
         return res.status(400)
           .json({
-            message: 'error missing data',
+            message: 'Error falta datos',
             code: 400,
           });
       }
@@ -83,7 +91,7 @@ export const insertPlatter = async (req, res) => {
         if (Platters) {
           return res.status(409)
             .json({
-              message: `Category already using ${platterName}`
+              message: `Error el plato ${platterName} ya existe`,
             });
         }
       } catch (error) {
@@ -104,12 +112,12 @@ export const insertPlatter = async (req, res) => {
         await moveFile(`${req.file.originalname}`, `${id}${req.file.originalname}`, 'Platters');
         return res.status(200)
           .json({
-            message: 'Create platter successful'
+            message: 'Plato creado con exito'
           });
       } catch (e) {
         return res.status(400)
           .json({
-            message: 'Error create platter',
+            message: 'Error al crear el plato',
             error: e
           });
       }
@@ -146,7 +154,7 @@ export const updatePlatter = async (req, res) => {
                 || !categoryId) {
         return res.status(400)
           .json({
-            message: 'error missing data',
+            message: 'Error falta datos',
             code: 400,
           });
       }
@@ -166,12 +174,12 @@ export const updatePlatter = async (req, res) => {
         if (platter && parseInt(platter.dataValues.platterId, 10)
                     !== parseInt(platterID, 10)) {
           return res.status(409).json({
-            message: `user already using ${platterName}`
+            message: `El plato ${platterName} ya existe`
           });
         }
       } catch (error) {
         console.log(error);
-        return res.status(400).json('error');
+        return res.status(400).json('Error');
       }
       try {
         let image;
@@ -205,23 +213,23 @@ export const updatePlatter = async (req, res) => {
           }, { where: { platterID } });
           return res.status(200)
             .json({
-              message: 'Update category successful no image'
+              message: 'plato actualizado'
             });
         }
       } catch (error) {
         console.log(error);
         return res.status(500).json({
           code: 500,
-          message: 'error move file',
+          message: 'Erro al mover el archivo',
         });
       }
     } catch (e) {
       return res.status(400)
-        .json('Error create category');
+        .json('Error al actualizar el plato');
     }
     return res.status(200)
       .json({
-        message: 'Update category successful with images',
+        message: 'plato actualizado con exito',
 
       });
   });
@@ -238,11 +246,11 @@ export const deletePlatter = async (req, res) => {
       }
     });
     return res.status(200).json({
-      message: 'Platter deleting successful'
+      message: 'Plato eliminado con exito'
     });
   } catch (e) {
     return res.status(400).json({
-      message: 'Error deleting platter'
+      message: 'Error al eliminar el plato'
     });
   }
 };

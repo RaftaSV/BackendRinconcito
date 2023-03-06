@@ -15,8 +15,9 @@ orderDetailModel.hasMany(OrderModel, { foreignKey: 'orderId' });
 
 // get all orders se utiliza para obtener todos los pedidos existentes
 export const getAllOrders = async (req, res) => {
+  const { fecha } = req.params;
   try {
-    const date = new Date();
+    const date = new Date(fecha);
     date.setDate(date.getDate());
     const newDate = date.toISOString().substring(0, 10);
 
@@ -25,16 +26,22 @@ export const getAllOrders = async (req, res) => {
         orderStatus: 0,
         orderDate: newDate,
       },
-      include: [{
-        model: orderDetailModel,
-        where: {
-          detailOrderStatus: 0
+      include: [
+        {
+          model: orderDetailModel,
+          where: {
+            detailOrderStatus: 0
+          }
         },
-      }]
+        {
+          model: TableModel
+          
+        }
+      ]
     });
-    return res.status(200).json({
+    return res.status(200).json(
       data
-    });
+    );
   } catch (e) {
     return res.status(500).json({
       message: 'error getting all orders',
