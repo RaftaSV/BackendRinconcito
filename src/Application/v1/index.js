@@ -16,7 +16,7 @@ const router = express.Router();
 router.use('/User', userRouter);
 router.use('/Image', Images);
 router.use('/Categories', categoryRouter);
-router.use('/Platter', platterRouter);
+router.use('/Platters', platterRouter);
 router.use('/Costs', costRouter);
 router.use('/Tables', tableRouter);
 router.use('/Orders', orderRouter);

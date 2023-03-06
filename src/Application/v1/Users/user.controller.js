@@ -64,7 +64,8 @@ export const insertUser = async (req, res) => {
     phone,
     userName,
     password,
-    userType
+    userType,
+    userStatus
   } = req.body;
   if (!name || !lastName || !phone || !userName || !password || !userType) {
     return res.status(401).json({
@@ -89,7 +90,7 @@ export const insertUser = async (req, res) => {
     userName,
     userPassword: await encryptPass(password),
     userType,
-    userStatus: 0
+    userStatus
   };
   try {
     const data = await UserModel.create(newUser);

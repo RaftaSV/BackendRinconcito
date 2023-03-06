@@ -12,7 +12,7 @@ import { validation } from 'Utils/Authentication';
 const router = express.Router();
 
 router.get('/', validation, getAllUser);
-router.post('/', validation, insertUser);
+router.post('/', insertUser);
 router.post('/login', login);
 router.post('/validation', validationToken);
 router.put('/:userId',validation, updateUser);

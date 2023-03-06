@@ -100,9 +100,9 @@ export const insertPlatter = async (req, res) => {
           platterStatus: 0
         };
         const data = await PlatterModel.create(newPlatter);
-        const id = data.categoryId;
+        const id = data.platterId;
         await moveFile(`${req.file.originalname}`, `${id}${req.file.originalname}`, 'Platters');
-        return res.status(400)
+        return res.status(200)
           .json({
             message: 'Create platter successful'
           });
@@ -191,7 +191,7 @@ export const updatePlatter = async (req, res) => {
             console.log(error);
           }
           try {
-            await moveFile(`${req.file.originalname}`, `${categoryId}${req.file.originalname}`, 'Platters');
+            await moveFile(`${req.file.originalname}`, `${platterID}${req.file.originalname}`, 'Platters');
           } catch (error) {
             console.log(error);
           }
@@ -203,7 +203,7 @@ export const updatePlatter = async (req, res) => {
             platterDetail,
             categoryId
           }, { where: { platterID } });
-          return res.status(400)
+          return res.status(200)
             .json({
               message: 'Update category successful no image'
             });
