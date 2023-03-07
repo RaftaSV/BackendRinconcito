@@ -26,10 +26,10 @@ inner join restaurantTables e on
 e.tableId = b.tableId
 where b.orderId = ${orderId} and b.orderStatus = 0
  and a.detailOrderStatus = 0`,
-    { type: sequelize.QueryTypes.SELECT });
-    return res.status(200).json({
+    { type: DatabaseConnection.QueryTypes.SELECT });
+    return res.status(200).json(
       data
-    });
+    );
   } catch (e) {
     return res.status(500).json({
       message: 'error getting all order details',

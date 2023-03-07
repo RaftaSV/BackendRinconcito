@@ -35,6 +35,15 @@ export const getAllPlatters = async (req, res) => {
 export const getPlattlerLike = async (req, res) => {
   try {
     const { platterName } = req.params;
+    if (!platterName) {
+    const data = await PlatterModel.findAll({
+      where: {
+        platterStatus: 0
+      },
+      limit: 4
+    });
+    return res.status(200).json(data);
+    }
     const data = await PlatterModel.findAll({
       where: {
         platterName: {
