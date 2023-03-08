@@ -8,7 +8,7 @@ import {
 
 const router = express.Router();
 
-router.get('/:orderId', getAllOrderDetails);
+router.get('/:orderId', validation, getAllOrderDetails);
 router.post('/:orderId',validation, insertOrderDetail);
 router.delete('/:detailsOrderId',validation, deleteOrderDetail);
 export default router;

@@ -36,6 +36,9 @@ export const getAllOrders = async (req, res) => {
         {
           model: TableModel
           
+        },
+        {
+          model: UserModel
         }
       ]
     });
