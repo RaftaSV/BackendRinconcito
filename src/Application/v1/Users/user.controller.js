@@ -40,9 +40,10 @@ export const login = async (req, res) => {
 };
 // con esta funcion se obtienen todos los usuarios del sistema que estan activos
 export const getAllUser = async (req, res) => {
-  const {userType} = req.params;
 
-  if (userType===null || userType===undefined) {
+  const {userStatus} = req.params;
+
+  if (userStatus===null || userStatus===undefined) {
   try {
     const data = await UserModel.findAll({
       where: { userStatus: 0 }
@@ -57,10 +58,10 @@ export const getAllUser = async (req, res) => {
         code: 500,
       });
   }
- } else if (userType===1) {
+ } else if (userStatus===1) {
   try {
     const data = await UserModel.findAll({
-      where: { userStatus: 0, userType }
+      where: { userStatus }
     });
     return res.status(200)
       .json(data);
@@ -75,7 +76,7 @@ export const getAllUser = async (req, res) => {
  }
  try {
   const data = await UserModel.findAll({
-    where: { userStatus: 0, userType }
+    where: { userStatus}
   });
   return res.status(200)
     .json(data);
@@ -173,10 +174,21 @@ export const updateUser = async (req, res) => {
             || !body.lastName
             || !body.phone
             || !body.userName
-            || !body.password
             || !body.userType) {
       return res.status(401).json({
         message: 'Error falta datos'
+      });     
+    }
+    if (!body.password) {
+      await UserModel.update({
+        userNames: body.name,
+        lastName: body.lastName,
+        phone: body.phone,
+        userName: body.userName,
+        userType: body.userType
+      }, { where: { userId } });
+      return res.status(200).json({
+        message: 'Usuario actualizado sin contraseña'
       });
     }
     const data = await UserModel.update({
@@ -187,7 +199,6 @@ export const updateUser = async (req, res) => {
       password: await encryptPass(body.password),
       userType: body.userType
     }, { where: { userId } });
-    console.log(data);
     return res.status(200).json({
       message: 'Usuario actualizado'
     });

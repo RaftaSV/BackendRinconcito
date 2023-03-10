@@ -11,8 +11,7 @@ import {
 import { validation } from 'Utils/Authentication';
 const router = express.Router();
 
-router.get('/', validation, getAllUser);
-router.get('/:userType',validation, getAllUser);
+router.get('/:userStatus',validation, getAllUser);
 router.post('/', insertUser);
 router.post('/login', login);
 router.post('/validation', validationToken);
