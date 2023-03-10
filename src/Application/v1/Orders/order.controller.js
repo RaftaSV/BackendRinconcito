@@ -59,6 +59,9 @@ export const insertOrder = async (req, res) => {
   const {
     orderType,
     tableId,
+    address,
+    customer,
+    numberPhone
   } = req.body;
   if (!orderType) {
     return res.status(401).json({
@@ -83,18 +86,39 @@ export const insertOrder = async (req, res) => {
       });
     }
   }
-  try {
-    const data = await OrderModel.create({
-      orderType: parseInt(orderType, 10),
-      userId: decoded.User.userId,
-      orderStatus: 0,
-    });
-    return res.status(200).json(data);
-  } catch (e) {
-    console.log(e);
-    return res.status(500).json({
-      message: e
-    });
+  if (parseInt(orderType, 10) === 1) {
+    try {
+      const data = await OrderModel.create({
+        orderType: parseInt(orderType, 10),
+        userId: decoded.User.userId,
+        customer,
+        orderStatus: 0,
+      });
+      return res.status(200).json(data);
+    } catch (e) {
+      console.log(e);
+      return res.status(500).json({
+        message: e
+      });
+    }
+  }
+  if (parseInt(orderType, 10) === 2) {
+    try {
+      const data = await OrderModel.create({
+        orderType: parseInt(orderType, 10),
+        userId: decoded.User.userId,
+        address,
+        customer,
+        numberPhone,
+        orderStatus: 0,
+      });
+      return res.status(200).json(data);
+    } catch (e) {
+      console.log(e);
+      return res.status(500).json({
+        message: e
+      });
+    }
   }
 };
 

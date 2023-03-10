@@ -40,6 +40,9 @@ export const login = async (req, res) => {
 };
 // con esta funcion se obtienen todos los usuarios del sistema que estan activos
 export const getAllUser = async (req, res) => {
+  const {userType} = req.params;
+
+  if (userType===null || userType===undefined) {
   try {
     const data = await UserModel.findAll({
       where: { userStatus: 0 }
@@ -53,6 +56,35 @@ export const getAllUser = async (req, res) => {
         message: 'Error at get data',
         code: 500,
       });
+  }
+ } else if (userType===1) {
+  try {
+    const data = await UserModel.findAll({
+      where: { userStatus: 0, userType }
+    });
+    return res.status(200)
+      .json(data);
+  } catch (error) {
+    console.error(error);
+    return res.status(500)
+      .json({
+        message: 'Error at get data',
+        code: 500,
+      });
+  }
+ }
+ try {
+  const data = await UserModel.findAll({
+    where: { userStatus: 0, userType }
+  });
+  return res.status(200)
+    .json(data);
+} catch (error) {
+  return res.status(500)
+    .json({
+      message: 'Error at get data',
+      code: 500,
+    });
   }
 };
 

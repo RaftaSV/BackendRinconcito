@@ -33,6 +33,9 @@ orderDate Date,
 orderType int not null,
 tableId int,
 userId int not null,
+address varchar (200),
+customer varchar (50),
+numberPhone varchar (9),
 orderStatus int not null
 );
 
@@ -50,7 +53,7 @@ create table users(
 userId int not null auto_increment primary key,
 userNames varchar(100) not null,
 lastName varchar(100) not null,
-phone varchar (8) not null,
+phone varchar (9) not null,
 userName varchar (50) not null,
 userPassword varchar(512) not null,
 userType int not null,
@@ -127,5 +130,4 @@ alter table invoiceDetails
 add foreign key (platterId)
 references platters (platterId);
 
-insert into users (userNames, lastName, phone, userName,userPassword, userType, userStatus) VALUES ('Karlos', 'Escobar', '22223445', 'Karlos', '$2b$10$Ku9Ig4PnowYdY2sglNwkweGbLDgnAc798TH8Av0OvfbNSUinFdrjm', 0, 0);
-
+insert into users (userNames, lastName, phone, userName,userPassword, userType, userStatus) VALUES ('Rafael', 'Gonzalez', '63114859', 'Rafta', '$2b$10$Ku9Ig4PnowYdY2sglNwkweGbLDgnAc798TH8Av0OvfbNSUinFdrjm', 0, 0);

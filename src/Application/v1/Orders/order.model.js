@@ -16,6 +16,15 @@ const OrderModel = DatabaseConnection.define('orders', {
   orderType: {
     type: sequelize.INTEGER
   },
+  address: {
+    type: sequelize.STRING
+  },
+  customer: {
+    type: sequelize.STRING
+  },
+  numberPhone: {
+    type: sequelize.STRING
+  },
   tableId: {
     type: sequelize.INTEGER,
     references: {
