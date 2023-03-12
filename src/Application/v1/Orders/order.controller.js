@@ -4,7 +4,7 @@ import OrderModel from './order.model';
 import TableModel from '../Tables/table.model';
 import UserModel from '../Users/user.model';
 import orderDetailModel from '../OrderDetails/orderDetail.model';
-import { getDate, getTime } from '../../../Utils/GetDate';
+import { getDate, getTime } from 'Utils/GetDate';
 
 OrderModel.belongsTo(TableModel, { foreignKey: 'tableId' });
 OrderModel.belongsTo(UserModel, { foreignKey: 'userId' });
@@ -20,7 +20,7 @@ export const getAllOrders = async (req, res) => {
     const date = new Date(fecha);
     date.setDate(date.getDate());
     const newDate = date.toISOString().substring(0, 10);
-
+console.log(newDate);
     const data = await OrderModel.findAll({
       where: {
         orderStatus: 0,
@@ -28,24 +28,18 @@ export const getAllOrders = async (req, res) => {
       },
       include: [
         {
-          model: orderDetailModel,
-          where: {
-            detailOrderStatus: 0
-          }
+          model: TableModel,
         },
         {
-          model: TableModel
-          
-        },
-        {
-          model: UserModel
-        }
-      ]
+          model: UserModel,
+      },
+      ],
     });
     return res.status(200).json(
       data
     );
   } catch (e) {
+    console.log(e);
     return res.status(500).json({
       message: 'error getting all orders',
     });
@@ -90,6 +84,9 @@ export const insertOrder = async (req, res) => {
     try {
       const data = await OrderModel.create({
         orderType: parseInt(orderType, 10),
+        orderTime: getTime().currentTime,
+        orderDate: getDate().newDate,
+        orderType: parseInt(orderType, 10),
         userId: decoded.User.userId,
         customer,
         orderStatus: 0,
@@ -109,6 +106,9 @@ export const insertOrder = async (req, res) => {
         userId: decoded.User.userId,
         address,
         customer,
+        orderTime: getTime().currentTime,
+        orderDate: getDate().newDate,
+        orderType: parseInt(orderType, 10),
         numberPhone,
         orderStatus: 0,
       });

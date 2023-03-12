@@ -185,7 +185,8 @@ export const updateUser = async (req, res) => {
         lastName: body.lastName,
         phone: body.phone,
         userName: body.userName,
-        userType: body.userType
+        userType: body.userType,
+        userStatus: body.userStatus
       }, { where: { userId } });
       return res.status(200).json({
         message: 'Usuario actualizado sin contraseña'
@@ -197,7 +198,8 @@ export const updateUser = async (req, res) => {
       phone: body.phone,
       userName: body.userName,
       password: await encryptPass(body.password),
-      userType: body.userType
+      userType: body.userType,
+      userStatus: body.userStatus
     }, { where: { userId } });
     return res.status(200).json({
       message: 'Usuario actualizado'
